@@ -30,7 +30,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
 
-  function emailInput(e){
+  function emailInput(e : React.ChangeEvent<HTMLInputElement>){
 
     const email = e.target.value;
 
@@ -47,11 +47,11 @@ export function LoginForm({
     console.log(path1)
   }
 
-  function passwordInput(e){
+  function passwordInput(e : React.ChangeEvent<HTMLInputElement>){
 
     const password = e.target.value;
 
-    if (password == 'mongo') {
+    if (password == 'user') {
       dispatch(checkUserPass());
     }else if( password == 'admin') {
       dispatch(checkAdminPass());
@@ -65,17 +65,20 @@ export function LoginForm({
   }
 
   function handleClick(){
-    const pathes : string = `${path1}${path2}` ;
-
-    if (pathes == ( 'user' || 'admin' || 'vendor' )) {
+    const path : string = `${path1}${path2}` ;
+    console.log(path1);
+    console.log(path2);
+    
+    if (path == ( 'user' || 'admin' || 'vendor' )) {
       
-      redirect(pathes)
-
+      redirect(path)
+      // const flag = true;
     }else{
       redirect('/')
+      // const flag = false;
       // const tempInput = "Not Found smthing like that !";
     }
-    // console.log(pathes) 
+    console.log(path) 
 
   }
 
@@ -121,7 +124,7 @@ export function LoginForm({
                 <Input id="password" type="password" onChange={ passwordInput } required />
               </Field>
               <Field>
-
+                
                 <Button onClick={ handleClick }>  
                   Login 
                 </Button>
