@@ -39,7 +39,7 @@ export function LoginForm({
     }else if( email == 'admin@gmail.com') {
       dispatch(checkAdmin());
     }else if( email == 'vendor@gmail.com'){
-      dispatch(checkVendor());
+      dispatch(checkVendor());  
     }else {
       return null;
     }

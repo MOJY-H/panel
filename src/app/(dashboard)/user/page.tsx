@@ -34,7 +34,7 @@ export function CardImage() {
 }
 
 export default function Page() {
-
+  
   
 
   return (
