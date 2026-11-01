@@ -1,74 +1,51 @@
-import { Badge } from "@/components/ui/badge"
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import './globals.css'
+import { CaseStudyFlipStack } from "@/components/ui/case-study-flip-stack"
 
-import data from "./data.json";
-
-export function CardImage() {
+export default function WorkPage() {
   return (
-    <Card className="relative mx-auto w-full max-w-sm pt-0">
-      <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
-      <img
-        src="https://plus.unsplash.com/premium_photo-1664392147011-2a720f214e01?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
-        alt="Event cover"
-        className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
-      />
-      <CardHeader>
-        <CardAction>
-          <Badge variant="secondary">Featured</Badge>
-        </CardAction>
-        <CardTitle>Design systems meetup</CardTitle>
-        <CardDescription>
-          A practical talk on component APIs, accessibility, and shipping
-          faster.
-        </CardDescription>
-      </CardHeader>
-    </Card>
+    <CaseStudyFlipStack
+      items={[
+        {
+          eyebrow: "Our Product",
+          title: " Best Shops , Best Quality ",
+          description: "You Can Add our product and Request to Deliver",
+          image: "https://plus.unsplash.com/premium_photo-1755164641235-d57118bbc1ff?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          imageAlt: "Portrait from the fintech campaign",
+          background: "#EEE5E9",
+          foreground: "#201D1F",
+          link: "basket",
+        },
+        {
+          eyebrow: "History of Product",
+          title: " Do you Remember Our Product ?  ",
+          description: " Check What U Wanna From Past !   ",
+          image: "https://images.unsplash.com/photo-1766040923580-16ad32fae8b4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          imageAlt: "A mountain retreat at dusk",
+          background: "#D3E7E9",
+          foreground: "##201D1F",
+          link: "history"
+        },
+        {
+          eyebrow: "Notif & Massages",
+          title: " Ding Ding , Check Your Notif Now !  ",
+          description: " There are Important Things Right There ",
+          image: "https://images.unsplash.com/photo-1766040923580-16ad32fae8b4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          imageAlt: "A mountain retreat at dusk",
+          background: "#E1ADAD",
+          foreground: "##201D1F",
+          link: "history"
+        },
+        {
+          eyebrow: "Delverence",
+          title: " Fast Delivery, Reliable Delivery  ",
+          description: "A cinematic booking journey with a stronger sense of place.",
+          image: "https://plus.unsplash.com/premium_photo-1682090260563-191f8160ca48?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          imageAlt: "A mountain retreat at dusk",
+          background: "#DDC4CF",
+          foreground: "#201D1F",
+          link: "calendar"
+        },
+        
+      ]}
+    />
   )
 }
-
-export default function Page() {
-
-  
-
-  return (
-
-    <>
-        <section>
-          <h3 className=" px-6 pt-6 pb-2 text-3xl" > What Did you Spend </h3>
-          <div className="grid grid-cols-3 px-6"> 
-            {
-              data.map((data)=>
-
-                <div key={data.id} className="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium">
-                    <h5 className="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8">{data.header}</h5>
-                    <p className="text-body"> {data.reviewer} </p>
-                    <span className="text-body"> {data.status} </span>
-                </div>
-
-              )
-            }
-          </div>
-
-          <h3 className=" px-6 pt-6 pb-2 text-3xl"> basket shop </h3>
-
-          <section className="grid grid-cols-3 gap-2 px-6 pb-6">
-            <CardImage />
-            <CardImage />
-            <CardImage />
-          </section>
-
-        </section>
-    </>
-
-  )
-}
-
-
-

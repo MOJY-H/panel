@@ -1,10 +1,7 @@
 'use client'
 
 import { cn } from "cn"
-// import Link from "next/link"
-// import Form from 'next/form'
-import { redirect } from 'next/navigation'
-
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -23,7 +20,6 @@ import { Input } from "@/components/ui/input"
 
 import { useAppDispatch, useAppSelector } from '@/lib/hook';
 import { checkAdmin, checkUser, checkVendor , checkAdminPass , checkUserPass , checkVendorPass } from "@/lib/features/loginSlice"
-
 
 export function LoginForm({
   className,
@@ -64,23 +60,26 @@ export function LoginForm({
     console.log(path2)
   }
 
+  const router = useRouter();
+
   function handleClick(){
     const path : string = `${path1}${path2}` ;
     console.log(path1);
     console.log(path2);
-    
-    if (path == ( 'user' || 'admin' || 'vendor' )) {
-      
-      redirect(path)
-      // const flag = true;
-    }else{
-      redirect('/')
-      // const flag = false;
-      // const tempInput = "Not Found smthing like that !";
-    }
-    console.log(path) 
 
+
+    if (path == ( 'admin')) {
+      router.push('/admin/home');
+    }else if(path == ('vendor')){
+      router.push('/vendor/home');
+    }else if(path == ('user')){
+      router.push('/user/home')
+    }else{
+      router.push('/')
+    }
+    console.log(path);
   }
+
 
   const dispatch = useAppDispatch();
   const path1 = useAppSelector(state => state.login.value1);
@@ -98,10 +97,8 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <form>
-            {/* <Form action={''}> */}
             <FieldGroup>
               <Field>
-                {/* <div>{tempInput}</div> */}
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
@@ -137,7 +134,6 @@ export function LoginForm({
                 </FieldDescription>
               </Field>
             </FieldGroup>
-            {/* </Form> */}
           </form>
         </CardContent>
       </Card>

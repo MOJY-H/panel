@@ -1,13 +1,7 @@
 'use client'
-// import { For } from "solid-js"
-// import { A } from "@solidjs/router"
 import { redirect } from "next/navigation"
-import Link from "next/link"
-import '@/app/globals.css'
-// import { useSelector, UseSelector } from "react-redux"
- 
-import { useAppDispatch, useAppSelector } from '@/lib/hook';
-import { Calendar, Home, Mail, Search, Settings, ShoppingBasket , Package , User2 , UserCheck , LogOut , History , MessageSquare} from "lucide-react"
+import '@/app/(dashboard)/globals.css'
+import { Calendar, Home, Mail, ShoppingBasket, Package, User2, UserCheck, LogOut, History, MessageSquare} from "lucide-react"
 import {
   Sidebar,
   SidebarContent,   
@@ -18,7 +12,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from "@/components/ui/sidebar"
-// import { title } from "process"
  
 const items1 = [
   {
@@ -36,7 +29,7 @@ const items1 = [
       },
       {
         title: "History",
-        url: "basket",
+        url: "history",
         icon: History
       },
       {
@@ -45,7 +38,7 @@ const items1 = [
         icon: Mail
       },
       {
-        title: "Calendar",
+        title: "Track Shipment",
         url: "calendar",
         icon: Calendar
       }
@@ -63,7 +56,7 @@ const items1 = [
         icon: History
       },
       {
-        title: "Calendar",
+        title: "Calendar",  
         url: "calendar",
         icon: Calendar
       },
@@ -96,7 +89,7 @@ const items1 = [
       },
       {
         title: "Support Notification",
-        url: "users",
+        url: "support-notification",
         icon: MessageSquare
       }
     ]
@@ -128,15 +121,18 @@ const items2 =[
     ]
   }
 ]
- 
-
-
 
 export function AppSidebar() {
 
-  const role1 =useAppSelector(state => state.login.value1);
-  const role2 =useAppSelector(state => state.login.value2);
-  console.log(`${role1}`);
+  const role1 = localStorage.getItem('val1');
+  const role2 = localStorage.getItem('val2'); 
+  const role:string = `${role1}${role2}`;
+  console.log(` test `,role);
+  
+  function handleClick(){
+    localStorage.clear();
+    redirect('/');
+  }
 
   return (
     <Sidebar>
@@ -146,109 +142,98 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
                 <SidebarMenuItem className="h-full flex flex-col gap-2 " >
-                      
                         
-                        {items1.map((items) => 
-                          items.admin.map((item,i:number) => 
-                            <div onClick={() => redirect(`/user/${item.url}`)} key={i}>
-                              <SidebarMenuButton > 
-                                <item.icon />
-                                <span>{item.title}</span>
-                              </SidebarMenuButton>
-                            </div>
-                          )) 
-                        }
-                          
-                        {items2.map((items) => 
-                            items.admin.map((item,i:number) => 
-                              <div key={i} className="mt-70">
-                                <div onClick={() => redirect(`/user/${item.url}`)} >
-                                    <SidebarMenuButton>  
-                                      <item.icon />
-                                      <span>{item.title}</span>
-                                    </SidebarMenuButton>
+                        {
+                          (role == 'user') ? (
+
+                            items1.map((items) =>
+                              items.user.map((item,i:number) => 
+                                <div onClick={() => redirect(`/user/${item.url}`)} key={i}>
+                                  <SidebarMenuButton className="cursor-pointer">
+                                    <item.icon />
+                                    <span>{item.title}</span>
+                                  </SidebarMenuButton>
                                 </div>
-                                <Link href={'/'} className="flex gap-2 pl-2 pt-5">
-                                    <LogOut />
-                                    <span> LogOut </span>
-                                </Link> 
-                            </div>
-                            ))
+                            )) 
+
+                          ) : (role == 'vendor') ? (
+                            
+                            items1.map((items) =>
+                              items.vendor.map((item,i:number) => 
+                                <div onClick={() => redirect(`/vendor/${item.url}`)} key={i}>
+                                  <SidebarMenuButton className="cursor-pointer">
+                                    <item.icon />
+                                    <span>{item.title}</span>
+                                  </SidebarMenuButton>
+                                </div>
+                          )) 
+
+                          ) : (
+                            items1.map((items) =>
+                              items.admin.map((item,i:number) => 
+                                <div onClick={() => redirect(`/admin/${item.url}`)} key={i}>
+                                  <SidebarMenuButton className="cursor-pointer">
+                                    <item.icon />
+                                    <span>{item.title}</span>
+                                  </SidebarMenuButton>
+                                </div>
+                            )) 
+                          )
                         }
-                        
-                        {/* // ( `${role1}${role2}` == 'user' ) ? 
-                        // (user_items1.map(( item , i:number ) => (
-                        //     <div onClick={() => redirect(`/user/${item.url}`)} key={i}>
-                        //       <SidebarMenuButton > 
-                        //         <item.icon />
-                        //         <span>{item.title}</span>
-                        //       </SidebarMenuButton>
-                        //     </div>
-                        // )) 
-                        // &&
-                        // user_items2.map((item,i:number) => (
-                        //     <div key={i} className="mt-70">
-                        //         <div onClick={() => redirect(`/user/${item.url}`)} >
-                        //             <SidebarMenuButton>  
-                        //               <item.icon />
-                        //               <span>{item.title}</span>
-                        //             </SidebarMenuButton>
-                        //         </div>
-                        //         <Link href={'/'} className="flex gap-2">
-                        //             <LogOut />
-                        //             <span> LogOut </span>
-                        //         </Link> 
-                        //     </div>
-                        // )) )
-                        // : ((`${role1}${role2}` =='vendor' ) ? 
-                        // (vendor_items1.map((item , i:number) => (
-                        //     <div onClick={() => redirect(`/user/${item.url}`)} key={i}>
-                        //         <SidebarMenuButton >  
-                        //           <item.icon />
-                        //           <span>{item.title}</span>
-                        //         </SidebarMenuButton>
-                        //     </div>
-                        // )) 
-                        // &&
-                        // vendor_items2.map((item,i:number) => (
-                        //     <div key={i} className="mt-70">
-                        //         <div onClick={() => redirect(`/user/${item.url}`)} >
-                        //             <SidebarMenuButton>  
-                        //               <item.icon />
-                        //               <span>{item.title}</span>
-                        //             </SidebarMenuButton>
-                        //         </div>
-                        //         <Link href={'/'} className="flex gap-2">
-                        //             <LogOut />
-                        //             <span> LogOut </span>
-                        //         </Link> 
-                        //     </div>
-                        // ))  ) 
-                        // : (admin_items1.map((item , i:number) => (
-                        //     <div onClick={() => redirect(`/user/${item.url}`)} key={i}>
-                        //         <SidebarMenuButton >  
-                        //                 <item.icon />
-                        //                 <span>{item.title}</span>
-                        //         </SidebarMenuButton>
-                        //     </div>
-                        // )) 
-                        // &&
-                        // admin_items2.map((item,i:number) => (
-                        //     <div key={i} className="mt-70">
-                        //         <div onClick={() => redirect(`/user/${item.url}`)} >
-                        //             <SidebarMenuButton>  
-                        //                 <item.icon />
-                        //                 <span>{item.title}</span>
-                        //             </SidebarMenuButton>
-                        //         </div>
-                        //         <Link href={'/'} className="flex gap-2">
-                        //             <LogOut />
-                        //             <span> LogOut </span>
-                        //         </Link> 
-                        //     </div>
-                        // )) ) ) */}
-                      
-                      
+                        {
+                          (role == 'user') ? (
+
+                            items2.map((items) => 
+                              items.user.map((item,i:number) => 
+                                <div key={i} className="mt-70">
+                                  <div onClick={() => redirect(`/user/${item.url}`)} >
+                                      <SidebarMenuButton className="cursor-pointer">
+                                        <item.icon />
+                                        <span>{item.title}</span>
+                                      </SidebarMenuButton>
+                                  </div>
+                                  <div onClick={handleClick} className=" cursor-pointer hover:bg-gray-100 rounded-xl flex gap-2 pl-2 py-1 my-3">
+                                      <LogOut />
+                                      <span> LogOut </span>
+                                  </div> 
+                                </div>
+                            ))
+
+                          ) : (role == 'vendor') ? (
+                            items2.map((items) => 
+                              items.vendor.map((item,i:number) => 
+                                <div key={i} className="mt-70">
+                                  <div onClick={() => redirect(`/vendor/${item.url}`)} >
+                                      <SidebarMenuButton className="cursor-pointer">  
+                                        <item.icon />
+                                        <span>{item.title}</span>
+                                      </SidebarMenuButton>
+                                  </div>
+                                  <div onClick={handleClick} className=" cursor-pointer hover:bg-gray-100 rounded-xl flex gap-2 pl-2 py-1 my-3">
+                                      <LogOut />
+                                      <span> LogOut </span>
+                                  </div> 
+                                </div>
+                            ))
+                          ) : (
+                            items2.map((items) => 
+                              items.admin.map((item,i:number) => 
+                                <div key={i} className="mt-70">
+                                  <div onClick={() => redirect(`/admin/${item.url}`)} >
+                                      <SidebarMenuButton className="cursor-pointer">   
+                                        <item.icon />
+                                        <span>{item.title}</span>
+                                      </SidebarMenuButton>
+                                  </div>
+                                  <div onClick={handleClick} className=" cursor-pointer hover:bg-gray-100 rounded-1xl flex gap-2 pl-2 py-2 my-3">
+                                      <LogOut />
+                                      <span> LogOut </span>
+                                  </div> 
+                                </div>
+                            ))
+                          )
+
+                        }
 
                 </SidebarMenuItem>
             </SidebarMenu>
