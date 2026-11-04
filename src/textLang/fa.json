@@ -1,0 +1,17 @@
+{
+  "Login": {
+    "title": "",
+    "describe" : " ایمیل خود را برای ورود به سایت وارد کنید",
+    "email" : "ایمیل",
+    "password" : "رمز ورود",
+    "forgot-your-password" : "فراموشی رمز عبور",
+    "login" : "ورود",
+    "login-with-google" : "ورود با حساب گوگل",
+    "dont-have-acc" : "اکانت ندارید ؟",
+    "sign-up" : "ثبت نام"
+
+  },
+  "admin": {
+    
+  }
+}   

@@ -1,10 +1,7 @@
 'use client'
 
 import { cn } from "cn"
-// import Link from "next/link"
-// import Form from 'next/form'
-import { redirect } from 'next/navigation'
-
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -23,14 +20,14 @@ import { Input } from "@/components/ui/input"
 
 import { useAppDispatch, useAppSelector } from '@/lib/hook';
 import { checkAdmin, checkUser, checkVendor , checkAdminPass , checkUserPass , checkVendorPass } from "@/lib/features/loginSlice"
+import {useTranslations} from 'next-intl';
 
-
-export function LoginForm({
+export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
 
-  function emailInput(e){
+  function emailInput(e : React.ChangeEvent<HTMLInputElement>){
 
     const email = e.target.value;
 
@@ -39,7 +36,7 @@ export function LoginForm({
     }else if( email == 'admin@gmail.com') {
       dispatch(checkAdmin());
     }else if( email == 'vendor@gmail.com'){
-      dispatch(checkVendor());
+      dispatch(checkVendor());  
     }else {
       return null;
     }
@@ -47,11 +44,11 @@ export function LoginForm({
     console.log(path1)
   }
 
-  function passwordInput(e){
+  function passwordInput(e : React.ChangeEvent<HTMLInputElement>){
 
     const password = e.target.value;
 
-    if (password == 'mongo') {
+    if (password == 'user') {
       dispatch(checkUserPass());
     }else if( password == 'admin') {
       dispatch(checkAdminPass());
@@ -64,42 +61,47 @@ export function LoginForm({
     console.log(path2)
   }
 
+  const router = useRouter();
+
   function handleClick(){
-    const pathes : string = `${path1}${path2}` ;
+    const path : string = `${path1}${path2}` ;
+    console.log(path1);
+    console.log(path2);
 
-    if (pathes == ( 'user' || 'admin' || 'vendor' )) {
-      
-      redirect(pathes)
 
+    if (path == ( 'admin')) {
+      router.push('/admin/home');
+    }else if(path == ('vendor')){
+      router.push('/vendor/home');
+    }else if(path == ('user')){
+      router.push('/user/home')
     }else{
-      redirect('/')
-      // const tempInput = "Not Found smthing like that !";
+      router.push('/')
     }
-    // console.log(pathes) 
-
+    console.log(path);
   }
+
 
   const dispatch = useAppDispatch();
   const path1 = useAppSelector(state => state.login.value1);
   const path2 = useAppSelector(state => state.login.value2);
 
+  const t = useTranslations('Login');
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {t('describe')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
-            {/* <Form action={''}> */}
             <FieldGroup>
               <Field>
-                {/* <div>{tempInput}</div> */}
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email">{t('email')}</FieldLabel> 
                 <Input
                   id="email"
                   type="email"
@@ -110,31 +112,30 @@ export function LoginForm({
               </Field>
               <Field>
                 <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel htmlFor="password">{t('password')}</FieldLabel>
                   <a
                     href="#"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
-                    Forgot your password?
+                    {t('forgot-your-password')}
                   </a>
                 </div>
                 <Input id="password" type="password" onChange={ passwordInput } required />
               </Field>
               <Field>
-
+                
                 <Button onClick={ handleClick }>  
-                  Login 
+                  {t('login')} 
                 </Button>
 
                 <Button variant="outline" type="button">
-                  Login with Google
+                  {t('login-with-google')}
                 </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a href="#  ">Sign up</a>
+                  {t('dont-have-acc')} <a href="#  ">{t('sign-up')}</a>
                 </FieldDescription>
               </Field>
             </FieldGroup>
-            {/* </Form> */}
           </form>
         </CardContent>
       </Card>

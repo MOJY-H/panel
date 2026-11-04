@@ -70,8 +70,7 @@ export function SectionCards() {
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
-              <TrendingUpIcon
-              />
+              <TrendingUpIcon/>
               +12.5%
             </Badge>
           </CardAction>
@@ -86,7 +85,7 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Growth Rate</CardDescription>
+          <CardDescription> Growth Rate </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             4.5%
           </CardTitle>

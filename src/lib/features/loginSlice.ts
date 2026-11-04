@@ -1,3 +1,5 @@
+"use client"
+
 import { createSlice } from '@reduxjs/toolkit'
 
 export const loginSlice = createSlice({
@@ -8,22 +10,22 @@ export const loginSlice = createSlice({
   },
   reducers: {
     checkUser : (state) => {
-      state.value1 = 'us'
+      localStorage.setItem("val1",state.value1='us');
     },
     checkAdmin: (state) => {
-      state.value1 = 'ad'
+      localStorage.setItem("val1",state.value1='ad'); 
     },
     checkVendor : (state) => {
-      state.value1 = 'ven'
+      localStorage.setItem("val1",state.value1='ven');
     },
     checkUserPass : (state) => {
-      state.value2 = 'er'
+      localStorage.setItem("val2",state.value2='er');
     },
     checkAdminPass : (state) => {
-      state.value2 = 'min'
+      localStorage.setItem("val2",state.value2='min');
     },
     checkVendorPass : (state) => {
-      state.value2 = 'dor'
+      localStorage.setItem("val2",state.value2='dor');
     }
   },
 })
