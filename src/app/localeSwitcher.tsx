@@ -1,17 +1,18 @@
+'use client'
 import { Locale } from "next-intl";
-import { Button } from "./ui/button";
+import { Button } from "../components/ui/button";
 
 type props = {  
     changeLocaleAction: (locale : Locale) => Promise<void>;
 }
 
-export default function localeSwitcher({changeLocaleAction }: props){
+export default function LocaleSwitcher({changeLocaleAction }: props){
     return (
         <div>
             {['en','fa'].map((i,num) => (
                 <Button key={num} onClick={()=>changeLocaleAction(i as Locale)}>
                     {i.toUpperCase()}
-                </Button>
+                </Button>   
             ))}
         </div>
     )

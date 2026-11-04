@@ -3,9 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import { ThemeProvider } from "@/components/theme-provider"
-import {NextIntlClientProvider} from 'next-intl';
+import {Locale, NextIntlClientProvider} from 'next-intl';
 import { cookies } from "next/headers";
-import localeSwitcher from "@/components/localeSwitcher";
+import LocaleSwitcher from "@/app/localeSwitcher";
+import { getLocale } from "next-intl/server";
 
 
 const geistSans = Geist({
@@ -24,22 +25,28 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  children: React.ReactNode;
+  children: React.ReactNode
 };
 
-} 
 
-export default function RootLayout({ children }: Props) {
 
+export default async function RootLayout({ children }: Props) {
+  const locale = await getLocale();
   async function changeLocaleAction(locale:Locale) {
     "use server"
     const store = await cookies();
-    store.set('locale',locale)
+    store.set('locale',locale);
+    console.log(locale);
   }
+  let dir = '';
+  // locale == 'en' ? dirr = 'rtl' : dirr = 'ltr';
   
+  locale == 'en' ? dir = 'ltr' : dir = 'rtl';
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={ dir }
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col"  cz-shortcut-listen="true">
@@ -52,7 +59,7 @@ export default function RootLayout({ children }: Props) {
 
             <StoreProvider>
               <NextIntlClientProvider>
-                <localeSwitcher changeLocaleAction={changeLocaleAction} />
+                <LocaleSwitcher changeLocaleAction={changeLocaleAction} />
                 {children}
               </NextIntlClientProvider>
             </StoreProvider>  

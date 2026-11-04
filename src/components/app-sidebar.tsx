@@ -13,9 +13,9 @@ import {
   SidebarMenuItem
 } from "@/components/ui/sidebar"
 
-import { Locale } from "next-intl"
-import { cookies } from "next/headers"
-import localeSwitcher from "./localeSwitcher"
+// import { Locale } from "next-intl"
+// import { cookies } from "next/headers"
+// import localeSwitcher from "./localeSwitcher"
  
 const items1 = [
   {
@@ -129,7 +129,7 @@ const items2 =[
 export function AppSidebar() {
 
   const role1 = localStorage.getItem('val1');
-  const role2 = localStorage.getItem('val2'); 
+  const role2 = localStorage.getItem('val2');
   const role:string = `${role1}${role2}`;
   console.log(` test `,role);
   
