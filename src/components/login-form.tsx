@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input"
 
 import { useAppDispatch, useAppSelector } from '@/lib/hook';
 import { checkAdmin, checkUser, checkVendor , checkAdminPass , checkUserPass , checkVendorPass } from "@/lib/features/loginSlice"
-import {useTranslations} from 'next-intl';
+import {useTranslations} from 'next-intl';  
 
 export default function LoginForm({
   className,
@@ -89,56 +89,58 @@ export default function LoginForm({
   const t = useTranslations('Login');
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('title')}</CardTitle>
-          <CardDescription>
-            {t('describe')}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="email">{t('email')}</FieldLabel> 
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  onChange={ emailInput }
-                  required
-                />
-              </Field>
-              <Field>
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">{t('password')}</FieldLabel>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    {t('forgot-your-password')}
-                  </a>
-                </div>
-                <Input id="password" type="password" onChange={ passwordInput } required />
-              </Field>
-              <Field>
-                
-                <Button onClick={ handleClick }>  
-                  {t('login')} 
-                </Button>
+    <>
+      <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <Card>
+          <CardHeader>
+            <CardTitle>{t('title')}</CardTitle>
+            <CardDescription>
+              {t('describe')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form>
+              <FieldGroup>
+                <Field>
+                  <FieldLabel htmlFor="email">{t('email')}</FieldLabel> 
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    onChange={ emailInput }
+                    required
+                  />
+                </Field>
+                <Field>
+                  <div className="flex items-center">
+                    <FieldLabel htmlFor="password">{t('password')}</FieldLabel>
+                    <a
+                      href="#"
+                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    >
+                      {t('forgot-your-password')}
+                    </a>
+                  </div>
+                  <Input id="password" type="password" onChange={ passwordInput } required />
+                </Field>
+                <Field>
+                  
+                  <Button onClick={ handleClick }>  
+                    {t('login')} 
+                  </Button>
 
-                <Button variant="outline" type="button">
-                  {t('login-with-google')}
-                </Button>
-                <FieldDescription className="text-center">
-                  {t('dont-have-acc')} <a href="#  ">{t('sign-up')}</a>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+                  <Button variant="outline" type="button">
+                    {t('login-with-google')}
+                  </Button>
+                  <FieldDescription className="text-center">
+                    {t('dont-have-acc')} <a href="#  ">{t('sign-up')}</a>
+                  </FieldDescription>
+                </Field>
+              </FieldGroup>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </>  
   )
 }

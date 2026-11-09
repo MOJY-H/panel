@@ -13,7 +13,7 @@ export const loginSlice = createSlice({
       localStorage.setItem("val1",state.value1='us');
     },
     checkAdmin: (state) => {
-      localStorage.setItem("val1",state.value1='ad'); 
+      localStorage.setItem("val1",state.value1='ad');  
     },
     checkVendor : (state) => {
       localStorage.setItem("val1",state.value1='ven');

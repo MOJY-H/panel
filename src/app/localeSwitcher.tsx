@@ -8,7 +8,7 @@ type props = {
 
 export default function LocaleSwitcher({changeLocaleAction }: props){
     return (
-        <div>
+        <div className="">
             {['en','fa'].map((i,num) => (
                 <Button key={num} onClick={()=>changeLocaleAction(i as Locale)}>
                     {i.toUpperCase()}

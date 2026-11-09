@@ -13,9 +13,6 @@ import {
   SidebarMenuItem
 } from "@/components/ui/sidebar"
 
-// import { Locale } from "next-intl"
-// import { cookies } from "next/headers"
-// import localeSwitcher from "./localeSwitcher"
  
 const items1 = [
   {
@@ -142,6 +139,7 @@ export function AppSidebar() {
 
 
   return (
+    <>
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
@@ -248,5 +246,6 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
+    </>
   )
 }

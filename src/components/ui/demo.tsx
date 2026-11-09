@@ -20,6 +20,7 @@ import { Check, ImagePlus, X } from "lucide-react";
 import { useId, useState } from "react";
 
 function Component() {
+  
   const id = useId();
 
   const maxLength = 180;
