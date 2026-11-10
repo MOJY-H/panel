@@ -1,6 +1,5 @@
 // 'use client'
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import { ThemeProvider } from "@/components/theme-provider"
@@ -8,6 +7,7 @@ import {Locale, NextIntlClientProvider} from 'next-intl';
 import { cookies } from "next/headers";
 import LocaleSwitcher from "@/app/localeSwitcher";
 import { getLocale } from "next-intl/server"; 
+import { Suspense } from "react";
 
 
 export const metadata: Metadata = {
@@ -38,6 +38,7 @@ type Props = {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col"  cz-shortcut-listen="true">
+        <Suspense fallback={null}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -49,9 +50,9 @@ type Props = {
                 <LocaleSwitcher changeLocaleAction={changeLocaleAction} />
                 {children}
               </NextIntlClientProvider>
-            </StoreProvider>  
-
+            </StoreProvider>
           </ThemeProvider>  
+          </Suspense>        
       </body>
     </html>
   );
