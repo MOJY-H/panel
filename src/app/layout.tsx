@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 import StoreProvider from "./StoreProvider";
 import { ThemeProvider } from "@/components/theme-provider"
-import {NextIntlClientProvider} from 'next-intl';
+import {NextIntlClientProvider, type Locale} from 'next-intl';
 import { cookies } from "next/headers";
 import localeSwitcher from "@/components/localeSwitcher";
 
@@ -27,8 +28,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-} 
-
 export default function RootLayout({ children }: Props) {
 
   async function changeLocaleAction(locale:Locale) {
@@ -50,12 +49,14 @@ export default function RootLayout({ children }: Props) {
             disableTransitionOnChange
           >
 
-            <StoreProvider>
-              <NextIntlClientProvider>
-                <localeSwitcher changeLocaleAction={changeLocaleAction} />
-                {children}
-              </NextIntlClientProvider>
-            </StoreProvider>  
+            <Suspense fallback={null}>
+              <StoreProvider>
+                <NextIntlClientProvider>
+                  <localeSwitcher changeLocaleAction={changeLocaleAction} />
+                  {children}
+                </NextIntlClientProvider>
+              </StoreProvider>
+            </Suspense>
 
           </ThemeProvider>  
       </body>

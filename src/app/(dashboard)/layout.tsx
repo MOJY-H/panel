@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import StoreProvider from "./vendor/StoreProvider";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
@@ -40,9 +41,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <AppSidebar />
               <main className="w-full">
                 <SidebarTrigger />
-                <StoreProvider>
-                  {children}
-                </StoreProvider>
+                <Suspense fallback={null}>
+                  <StoreProvider>
+                    {children}
+                  </StoreProvider>
+                </Suspense>
               </main>
             </SidebarProvider>
           </ThemeProvider>
