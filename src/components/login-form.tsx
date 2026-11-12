@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 
 import { useAppDispatch, useAppSelector } from '@/lib/hook';
-import { checkAdmin, checkUser, checkVendor , checkAdminPass , checkUserPass , checkVendorPass } from "@/lib/features/loginSlice"
+import { CheckAdmin, CheckUser, CheckVendor , CheckAdminPass , CheckUserPass , CheckVendorPass } from "@/lib/features/loginSlice"
 import {useTranslations} from 'next-intl';  
 
 export default function LoginForm({
@@ -32,11 +32,11 @@ export default function LoginForm({
     const email = e.target.value;
 
     if (email == 'user@gmail.com') {
-      dispatch(checkUser());
+      dispatch(CheckUser());
     }else if( email == 'admin@gmail.com') {
-      dispatch(checkAdmin());
+      dispatch(CheckAdmin());
     }else if( email == 'vendor@gmail.com'){
-      dispatch(checkVendor());  
+      dispatch(CheckVendor());  
     }else {
       return null;
     }
@@ -49,11 +49,11 @@ export default function LoginForm({
     const password = e.target.value;
 
     if (password == 'user') {
-      dispatch(checkUserPass());
+      dispatch(CheckUserPass());
     }else if( password == 'admin') {
-      dispatch(checkAdminPass());
+      dispatch(CheckAdminPass());
     }else if( password == 'vendor'){
-      dispatch(checkVendorPass());
+      dispatch(CheckVendorPass());
     }else {
       return null;
     }
@@ -74,7 +74,7 @@ export default function LoginForm({
     }else if(path == ('vendor')){
       router.push('/vendor/home');
     }else if(path == ('user')){
-      router.push('/user/home')
+      router.push('/user/home');
     }else{
       router.push('/')
     }

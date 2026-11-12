@@ -1,6 +1,7 @@
 "use client"
 
 import { createSlice } from '@reduxjs/toolkit'
+import { useEffect } from 'react';
 
 export const loginSlice = createSlice({
   name: 'login',
@@ -9,26 +10,38 @@ export const loginSlice = createSlice({
      value2 : ''
   },
   reducers: {
-    checkUser : (state) => {
-      localStorage.setItem("val1",state.value1='us');
+    CheckUser : (state) => {
+      
+        localStorage.setItem("val1",state.value1='us');
+      
     },
-    checkAdmin: (state) => {
-      localStorage.setItem("val1",state.value1='ad');  
+    CheckAdmin: (state) => {
+      
+        localStorage.setItem("val1",state.value1='ad');  
+      
     },
-    checkVendor : (state) => {
-      localStorage.setItem("val1",state.value1='ven');
+    CheckVendor : (state) => {
+      
+        localStorage.setItem("val1",state.value1='ven');
+      
     },
-    checkUserPass : (state) => {
-      localStorage.setItem("val2",state.value2='er');
+    CheckUserPass : (state) => {
+      
+        localStorage.setItem("val2",state.value2='er');
+      
     },
-    checkAdminPass : (state) => {
-      localStorage.setItem("val2",state.value2='min');
+    CheckAdminPass : (state) => {
+      
+        localStorage.setItem("val2",state.value2='min');
+      
     },
-    checkVendorPass : (state) => {
-      localStorage.setItem("val2",state.value2='dor');
+    CheckVendorPass : (state) => {
+      
+        localStorage.setItem("val2",state.value2='dor');
+      
     }
   },
 })
 
 export default loginSlice.reducer
-export const {checkUser , checkAdmin , checkVendor , checkUserPass , checkAdminPass ,checkVendorPass  } = loginSlice.actions
+export const {CheckUser , CheckAdmin , CheckVendor , CheckUserPass , CheckAdminPass ,CheckVendorPass  } = loginSlice.actions

@@ -27,16 +27,20 @@ import { Input } from "@/components/ui/input"
 
 
 const formSchema = z.object({
-  username: z
-    .number()
-    .min(5, "Date must be at least 5 characters.")
-    .max(7, "Date must be at most 7 characters.")
+  username: z.string(),
+  number1: z.number(),
+  number2: z.number(),
+  number3: z.number()
+    // .min(5, "Date must be at least 5 characters.")
+    // .max(7, "Date must be at most 7 characters.")
 })
 export function FormRhfInput() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: 2022,
+      number1: 1202,
+      number2: 0,
+      number3: 0
     },
   })
   function onSubmit(data: z.infer<typeof formSchema>) {
@@ -44,7 +48,7 @@ export function FormRhfInput() {
     toast("You submitted the following values:", {
       description: (
         <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          {/* <code>{JSON.stringify(data, null, 2)}</code> */}
+          <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
       position: "bottom-right",
@@ -68,26 +72,71 @@ export function FormRhfInput() {
         <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
-              name="username"
+              name="number1"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
-                    Date
+                  <FieldLabel htmlFor="form-rhf-input-username-year">
+                    Year
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-username-year"
                     aria-invalid={fieldState.invalid}
-                    placeholder="d/mm/yyyy"
-                    autoComplete="username"
+                    placeholder="yyyy"
+                    autoComplete="year"
+                    type="number"
+                  />
+                  {/* {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )} */}
+                </Field>
+              )}
+            />
+            <Controller
+              name="number2"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-input-username-month">
+                    month
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-input-username-month"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="yyyy"
+                    autoComplete="month"
+                    type="number"
+                  />
+                  {/* {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )} */}
+                </Field>
+              )}
+            />
+            <Controller
+              name="number3"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-input-username-day">
+                    Day
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-input-username-day"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="yyyy"
+                    autoComplete="Day"
+                    type="number"
                   />
                   <FieldDescription>
                     This is your public display Date. Must be number. Must only contain numbers.
                   </FieldDescription>
-                  {fieldState.invalid && (
+                  {/* {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
-                  )}
+                  )} */}
                 </Field>
               )}
             />
@@ -99,7 +148,7 @@ export function FormRhfInput() {
           <Button type="button" variant="outline" onClick={() => form.reset()}>
             Reset
           </Button>
-          <Button type="submit" form="form-rhf-input">
+          <Button type="submit" form="form-rhf-input" onClick={() => console.log(form)}>
             Save
           </Button>
         </Field>
@@ -108,3 +157,27 @@ export function FormRhfInput() {
   )
 }
 
+
+
+{/* <FieldLabel htmlFor="form-rhf-input-username-month">
+                    Month
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-input-username-month"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="mm/m"
+                    autoComplete="month"
+                    type="number"
+                  />
+                  <FieldLabel htmlFor="form-rhf-input-username-day">
+                    Day
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-input-username-day"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="d/dd"
+                    autoComplete="day"
+                    type="number"
+                  /> */}

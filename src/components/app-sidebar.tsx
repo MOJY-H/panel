@@ -125,7 +125,7 @@ const items2 =[
 
 export function AppSidebar() {
 
-  const role1 = localStorage.getItem('val1');
+  const role1 = localStorage.getItem('val1'); 
   const role2 = localStorage.getItem('val2');
   const role:string = `${role1}${role2}`;
   console.log(` test `,role);

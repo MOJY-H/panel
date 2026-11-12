@@ -20,10 +20,10 @@ type Props = {
   children: React.ReactNode
 };
 
-  export default async function RootLayout({ children }: Props) {
-    const locale = await getLocale();
-    async function changeLocaleAction(locale:Locale) {
-    "use server"
+export default async function RootLayout({ children }: Props) {
+  const locale = await getLocale();
+  async function changeLocaleAction(locale:Locale) {
+    "use server"    
     const store = await cookies();
     store.set('locale',locale);
     console.log(locale);
