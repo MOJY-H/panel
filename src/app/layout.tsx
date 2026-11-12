@@ -1,13 +1,13 @@
 // 'use client'
 import type { Metadata } from "next";
 import "./globals.css";
+import { Suspense } from "react";
 import StoreProvider from "./StoreProvider";
 import { ThemeProvider } from "@/components/theme-provider"
 import {Locale, NextIntlClientProvider} from 'next-intl';
 import { cookies } from "next/headers";
 import LocaleSwitcher from "@/app/localeSwitcher";
-import { getLocale } from "next-intl/server"; 
-import { Suspense } from "react";
+import { getLocale } from "next-intl/server";
 
 
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: Props) {
                 <LocaleSwitcher changeLocaleAction={changeLocaleAction} />
                 {children}
               </NextIntlClientProvider>
-            </StoreProvider>
+            </StoreProvider>  
           </ThemeProvider>  
           </Suspense>        
       </body>
